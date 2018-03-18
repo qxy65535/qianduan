@@ -1,10 +1,6 @@
 <template>
     <div id="editor">
-        <mavon-editor 
-            style="height: 100%" 
-            ref=md 
-            @imgAdd="$imgAdd" 
-            @imgDel="$imgDel">
+        <mavon-editor style="height: 100%" ref=md @imgAdd="$imgAdd" @imgDel="$imgDel">
         </mavon-editor>
     </div>
 </template>
@@ -23,23 +19,49 @@
             // or 'mavon-editor': mavonEditor
         },
         methods: {
-        // 绑定@imgAdd event
-        $imgAdd(pos, $file){
-            // 第一步.将图片上传到服务器.
-           var formdata = new FormData();
-           formdata.append('image', $file);
-           axios({
-               url: 'http://localhost:8081/images',
-               method: 'post',
-               data: formdata,
-               headers: { 'Content-Type': 'multipart/form-data' },
-           }).then((url) => {
-               // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
-               // $vm.$img2Url 详情见本页末尾
-               $vm.$img2Url(pos, url);
-           })
+            // 绑定@imgAdd event
+            $imgAdd(pos, $file) {
+                // 第一步.将图片上传到服务器.
+                var formdata = new FormData();
+                formdata.append('image', $file);
+                var vm = this.$refs.md;
+                axios({
+                    url: '/imgAdd',
+                    method: 'post',
+                    data: formdata,
+                    headers: { 'Content-Type': 'multipart/form-data' },
+                }).then((result) => {
+                    // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
+                    // $vm.$img2Url 详情见本页末尾
+
+                    if (result.data.success) {
+                        // alert(pos)
+                        vm.$img2Url(pos, result.data.url);
+                        vm.$refs.toolbar_left.$imgDelByFilename(pos);
+                    }
+                    else
+                        alert(result.data.message);
+                }).catch((error) => {
+                    alert(error);
+                })
+            },
+            $imgDel(filename) {
+                // alert(filename)
+                // var formdata = new FormData();
+                // formdata.append('filename', filename);
+                // var vm = this.$refs.md;
+                // axios({
+                //     url: 'http://localhost:8081/imgDel',
+                //     method: 'post',
+                //     data: formdata,
+                //     headers: { 'Content-Type': 'multipart/form-data' },
+                // }).then((result) => {
+                //     alert(result.data.message);
+                // }).catch((error) => {
+                //     alert(error);
+                // })
+            }
         }
-    }
     }
 </script>
 

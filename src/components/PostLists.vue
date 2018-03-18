@@ -2,17 +2,17 @@
     <main class="main">
         <article class="post" v-for="post in postlist" :key="post.id">
             <header class="post__head archive">
-                <a :href="['/artical/detail/' + post.id]">
+                <router-link :to="{path: '/artical/detail/' + post.id}">
                     <time class="post__time" :datetime="post.datetime">{{ post.datetime }}</time>
-                </a>
+                </router-link>
                 <h1 class="post__title archive">
-                    <a :href="['/artical/detail/' + post.id]">{{ post.title }}</a>
+                    <router-link :to="{path: '/artical/detail/' + post.id}">{{ post.title }}</router-link>
                 </h1>
             </header>
             <footer class="post__foot u-cf">
                 <ul class="post__tag u-fl">
                     <li class="post__tag__item" v-for="tag in post.tags">
-                        <a class="post__tag__link" href="/posts">{{ tag }}</a>
+                        <router-link class="post__tag__link" to="/posts">{{ tag }}</router-link>
                     </li>
                 </ul>
             </footer>

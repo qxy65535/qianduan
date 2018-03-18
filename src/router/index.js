@@ -4,10 +4,11 @@ import Home from '@/views/Home'
 import Posts from '@/views/Posts'
 import Editor from '@/components/MdEditor'
 import NotFound from '@/components/NotFound'
+
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',

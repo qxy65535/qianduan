@@ -6,6 +6,18 @@
         <nav class="head-nav u-fr">
             <ul class="head-nav__list">
                 <li class="head-nav__item">
+                    <!-- <a class="head-nav__link" href="/posts">posts</a> -->
+                    <router-link class="headerlink" to="posts">Posts</router-link>
+                </li>
+                <li class="head-nav__item">
+                    <router-link class="headerlink" to="/archives">Archives</router-link>
+                    <!-- <a class="head-nav__link" href="/archives">Archives</a> -->
+                </li>
+                <li class="head-nav__item">
+                    <router-link class="headerlink" to="/aboutme">About me</router-link>
+                    <!-- <a class="head-nav__link" href="/aboutme">About me</a> -->
+                </li>
+                <!-- <li class="head-nav__item">
                     <a class="headerlink" href="/posts">Posts</a>
                 </li>
                 <li class="head-nav__item">
@@ -13,7 +25,7 @@
                 </li>
                 <li class="head-nav__item">
                     <a class="headerlink" href="/aboutme">About me</a>
-                </li>
+                </li> -->
             </ul>
         </nav>
     </header>
