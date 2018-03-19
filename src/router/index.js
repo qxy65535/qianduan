@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from '@/views/Home'
 import Posts from '@/views/Posts'
 import Editor from '@/components/MdEditor'
+import Detail from '@/views/Detail'
 import NotFound from '@/components/NotFound'
 
 Vue.use(Router)
@@ -24,6 +25,11 @@ export default new Router({
       path: '/edit',
       name: 'Edit',
       component: Editor
+    },
+    {
+      path: '/article/detail/*',
+      name: 'Detail',
+      component: Detail
     },
     { 
       path: '*', 

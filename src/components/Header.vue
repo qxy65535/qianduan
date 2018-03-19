@@ -7,7 +7,7 @@
             <ul class="head-nav__list">
                 <li class="head-nav__item">
                     <!-- <a class="head-nav__link" href="/posts">posts</a> -->
-                    <router-link class="headerlink" to="posts">Posts</router-link>
+                    <router-link class="headerlink" to="/posts">Posts</router-link>
                 </li>
                 <li class="head-nav__item">
                     <router-link class="headerlink" to="/archives">Archives</router-link>
