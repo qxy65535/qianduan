@@ -62,7 +62,7 @@
                 formdata.append('image', $file);
                 var vm = this.$refs.md;
                 axios({
-                    url: 'http://localhost:8081/imgAdd',
+                    url: '/imgAdd',
                     method: 'post',
                     data: formdata,
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -72,7 +72,7 @@
 
                     if (result.data.success) {
                         // alert(pos)
-                        vm.$img2Url(pos, "http://localhost:8081" + result.data.url);
+                        vm.$img2Url(pos, result.data.url);
                         vm.$refs.toolbar_left.$imgDelByFilename(pos);
                     }
                     else
@@ -82,20 +82,7 @@
                 })
             },
             $imgDel(filename) {
-                // alert(filename)
-                // var formdata = new FormData();
-                // formdata.append('filename', filename);
-                // var vm = this.$refs.md;
-                // axios({
-                //     url: 'http://localhost:8081/imgDel',
-                //     method: 'post',
-                //     data: formdata,
-                //     headers: { 'Content-Type': 'multipart/form-data' },
-                // }).then((result) => {
-                //     alert(result.data.message);
-                // }).catch((error) => {
-                //     alert(error);
-                // })
+
             },
             publish() {
                 var vm = this;
@@ -117,7 +104,7 @@
                     return;
                 }
                 axios({
-                    url: 'http://localhost:8081/publish',
+                    url: '/publish',
                     method: 'post',
                     data: {
                         "title": vm.title,

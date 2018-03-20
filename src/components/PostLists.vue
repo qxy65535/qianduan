@@ -84,7 +84,7 @@
         mounted() {
             var vm = this;
             axios({
-                url: 'http://localhost:8081/postlist',
+                url: '/postlist',
                 method: 'post',
                 data: {
                     "page": 1
@@ -110,7 +110,7 @@
                 //这里可以发送ajax请求
                 var vm = this;
                 axios({
-                    url: 'http://localhost:8081/postlist',
+                    url: '/postlist',
                     method: 'post',
                     data: {
                         "page": index

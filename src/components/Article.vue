@@ -24,7 +24,7 @@
                 <section class="reward">
                         <a id="btn-reward" class="btn-reward" style="cursor:default" @click="reward">打赏</a>
                         <div class="reward-wrapper clearfix">
-                            <img src="/img/wechat.png" title="微信">
+                            <img src="../assets/wechat.png" title="微信">
                         </div>
                     </section>
             </main>
@@ -96,7 +96,7 @@
             // var formdata = new FormData();
             // formdata.append("id", vm.id);
             axios({
-                url: 'http://localhost:8081/article/detail',
+                url: '/article/detail',
                 method: 'post',
                 data: {
                     "id": vm.id
