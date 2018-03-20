@@ -4,6 +4,7 @@
     </div>
 </template>
 <style src="./assets/style/css/main.css"></style>
+<style src="./assets/style/css/jquery.fancybox.min.css"></style>
 
 <script>
     // import './assets/style/js/fancybox/jquery.fancybox.min.js'

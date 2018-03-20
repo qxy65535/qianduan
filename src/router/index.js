@@ -27,7 +27,7 @@ export default new Router({
       component: Editor
     },
     {
-      path: '/article/detail/*',
+      path: '/article/detail',
       name: 'Detail',
       component: Detail
     },

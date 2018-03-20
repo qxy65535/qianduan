@@ -6,8 +6,12 @@
                         <h1 class="post__title archive">
                             {{ source.title }}
                         </h1>
-                        <div class="markdown" v-html="compiledMarkdown"></div>
+                        <!-- <div class="markdown" v-html="compiledMarkdown"></div> -->
+
                     </header>
+                    <mavon-editor style="height: 100%" ref=md :toolbarsFlag="toolbarsFlag" 
+                    :subfield="subfield" :defaultOpen="defaultOpen">
+                    </mavon-editor>
                     <footer class="post__foot u-cf">
                         <ul class="post__tag u-fl">
                             <li class="post__tag__item" v-for="tag in source.tags">
@@ -15,13 +19,14 @@
                             </li>
                         </ul>
                     </footer>
-                    <section class="reward">
-                        <a class="btn-reward" href="#">打赏</a>
+
+                </article>
+                <section class="reward">
+                        <a id="btn-reward" class="btn-reward" style="cursor:default" @click="reward">打赏</a>
                         <div class="reward-wrapper clearfix">
                             <img src="/img/wechat.png" title="微信">
                         </div>
                     </section>
-                </article>
             </main>
 
 </template>
@@ -32,6 +37,10 @@
     var marked = require('marked');
     import 'highlight.js/styles/default.css';
     import hljs from 'highlight.js'
+    import { mavonEditor } from 'mavon-editor'
+    // import tag from './TagInput'
+    import 'mavon-editor/dist/css/index.css'
+    import axios from 'axios'
 
 
     marked.setOptions({
@@ -55,25 +64,69 @@
     export default {
         name: 'Article',
         props: {
-            source: {
-                id: '',
-                datetime: '',
-                title: '',
-                tags: [],
-                detail: ""
-            }
+
+            // id:"1"
+        },
+        components: {
+            mavonEditor,
+
         },
         data() {
             return {
-
+                toolbarsFlag: false , 
+                subfield: false, 
+                defaultOpen: "preview",
+                // detail: "",
+                source: {
+                    datetime: '',
+                    title: '',
+                    tags: [],
+                    detail: ""
+                },
             }
         },
         computed: {
             compiledMarkdown() {
-                return marked(this.source.detail, { sanitize: true })
+                // return marked(this.source.detail, { sanitize: true })
             }
+        },
+        mounted() {
+            var vm = this;
+            vm.id = vm.$route.query.id.toString();
+            // var formdata = new FormData();
+            // formdata.append("id", vm.id);
+            axios({
+                url: 'http://localhost:8081/article/detail',
+                method: 'post',
+                data: {
+                    "id": vm.id
+                },
+                contentType : "application/json" ,
+            }).then((result) => {
+                if (result.data.success) {
+                    // alert(pos)
+                    var res = result.data.res;
+                    vm.source.datetime = res.datetime;
+                    vm.source.title = res.title;
+                    // vm.source.detail = res.detail;
+                    vm.$refs.md.d_value = res.detail;
+                    vm.source.tags = res.tags;
+                }
+                else
+                    alert(result.data.message);
+            }).catch((error) => {
+                alert(error);
+            })
+        },
+        methods: {
+            reward: function(){
+    var $reward = $('.reward-wrapper');
+		$reward.slideToggle();
+}
         }
+
     }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -82,11 +135,14 @@
         margin: 30px 20px;
     }
     .post__title {
-        font-size: 300%;
-        margin: 0 20px;
+        font-size: 250%;
+        margin: 0 10px;
     }
     .post__time {
-        font-size: 120%;
+        font-size: 100%;
         margin: 0 20px;
+    }
+    .post__head {
+        margin: 17px;
     }
 </style>

@@ -32,6 +32,7 @@
     import tag from './TagInput'
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
+    
 
 
     export default {
@@ -99,35 +100,42 @@
             publish() {
                 var vm = this;
                 // console.log(vm.title)
-                // console.log(vm.tags)
+                // var a = vm.tags
+                // alert(['啊', '饿', '的'])
                 // console.log(vm.privacy)
                 // console.log(vm.$refs.md.d_value)
                 if (vm.title.length == 0) {
-                    alert("标题不能为空！");
+                    alert("取个题目吧 :)");
                     return;
                 }
-                // if (vm.tags.length == 0) {
-                //     alert("标签不能为空！");
-                //     return;
-                // }
+                if (vm.tags.length == 0) {
+                    alert("建个标签吧 :)");
+                    return;
+                }
                 if (vm.$refs.md.d_value.length == 0) {
-                    alert("内容不能为空！");
+                    alert("写点内容吧 :)");
                     return;
                 }
-                var formdata = new FormData();
-                formdata.append("title", vm.title);
-                formdata.append("tag", vm.tags);
-                formdata.append("privacy", vm.privacy);
-                formdata.append("article", vm.$refs.md.d_value);
-                formdata.append("newly", vm.newly);
-
                 axios({
                     url: 'http://localhost:8081/publish',
                     method: 'post',
-                    data: formdata,
-                    headers: { 'Content-Type': 'multipart/form-data' },
+                    data: {
+                        "title": vm.title,
+                        "tag": vm.tags,
+                        "privacy": vm.privacy,
+                        "article": vm.$refs.md.d_value
+                    },
+                    contentType : "application/json" ,
+
                 }).then((result) => {
-                    alert(result.data.message);
+                    if (result.data.success) {
+                        vm.$router.push({
+                            path: '/article/detail', 
+                            query: {id: result.data.res.id}
+                        });
+                    } else {
+                        alert(result.data.message);
+                    }
                 }).catch((error) => {
                     alert(error);
                 })

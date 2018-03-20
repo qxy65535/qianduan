@@ -2,11 +2,21 @@
     <main class="main">
         <article class="post" v-for="post in postlist" :key="post.id">
             <header class="post__head archive">
-                <router-link :to="{path: '/artical/detail/' + post.id}">
+                <router-link :to="{
+                    path: '/article/detail', 
+                    query: {
+                        id: post.id
+                    }}">
                     <time class="post__time" :datetime="post.datetime">{{ post.datetime }}</time>
                 </router-link>
                 <h1 class="post__title archive">
-                    <router-link :to="{path: '/artical/detail/' + post.id}">{{ post.title }}</router-link>
+                    <router-link :to="{
+                            path: '/article/detail', 
+                            query: {
+                                id: post.id
+                            }}">
+                            {{ post.title }}
+                    </router-link>
                 </h1>
             </header>
             <footer class="post__foot u-cf">
@@ -37,24 +47,13 @@
 <!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
 
 <script>
+    import axios from 'axios'
+
     export default {
         name: 'PostLists',
         data() {
             return {
-                postlist: [
-                    {
-                        id: 1,
-                        datetime: new Date().toDateString(),
-                        title: "hello",
-                        tags: ["tag1", "tag2", "tag3"]
-                    },
-                    {
-                        id: 2,
-                        datetime: new Date().toDateString(),
-                        title: "hello2",
-                        tags: ["tag4", "tag5", "tag6"]
-                    },
-                ],
+                postlist: [],
                 current: 1,
                 showItem: 5,
                 allpage: 13
@@ -82,11 +81,53 @@
                 return pag
             }
         },
+        mounted() {
+            var vm = this;
+            axios({
+                url: 'http://localhost:8081/postlist',
+                method: 'post',
+                data: {
+                    "page": 1
+                },
+                contentType: "application/json",
+            }).then((result) => {
+                if (result.data.success) {
+                    // alert(pos)
+                    var res = result.data.res;
+                    vm.allpage = res.totalpage;
+                    vm.postlist = res.postlist;
+                }
+                else
+                    alert(result.data.message);
+            }).catch((error) => {
+                alert(error);
+            })
+        },
         methods: {
             goto: function (index) {
                 if (index == this.current) return;
                 this.current = index;
                 //这里可以发送ajax请求
+                var vm = this;
+                axios({
+                    url: 'http://localhost:8081/postlist',
+                    method: 'post',
+                    data: {
+                        "page": index
+                    },
+                    contentType: "application/json",
+                }).then((result) => {
+                    if (result.data.success) {
+                        // alert(pos)
+                        var res = result.data.res;
+                        vm.allpage = res.totalpage;
+                        vm.postlist = res.postlist;
+                    }
+                    else
+                        alert(result.data.message);
+                }).catch((error) => {
+                    alert(error);
+                })
             }
         }
     }
