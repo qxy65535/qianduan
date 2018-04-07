@@ -31,33 +31,7 @@
             'blog-header': Header,
             'article-detail': Article,
             'blog-footer': Footer
-        },
-        // mounted() {
-        //     var month = ['January', 'February', 'March', 'April', 'May',
-        //         'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        //     var vm = this;
-        //     vm.id = vm.$route.query.id.toString();
-        //     var formdata = new FormData();
-        //     formdata.append("id", vm.id);
-        //     axios({
-        //         url: 'http://localhost:8081/article/detail',
-        //         method: 'post',
-        //         data: formdata
-        //     }).then((result) => {
-        //         if (result.data.success) {
-        //             // alert(pos)
-        //             var res = result.data.res;
-        //             vm.detail.datetime = month[res.month] + " " + res.day + ", " + res.year;
-        //             vm.detail.title = res.title;
-        //             vm.detail.detail = res.detail;
-        //             vm.detail.tags = res.tags;
-        //         }
-        //         else
-        //             alert(result.data.message);
-        //     }).catch((error) => {
-        //         alert(error);
-        //     })
-        // }
+        }
     }
 </script>
 

@@ -55,8 +55,8 @@
             return {
                 postlist: [],
                 current: 1,
-                showItem: 5,
-                allpage: 13
+                showItem: 1,
+                allpage: 1
             }
         },
         computed: {
@@ -94,7 +94,14 @@
                 if (result.data.success) {
                     // alert(pos)
                     var res = result.data.res;
-                    vm.allpage = res.totalpage;
+                    vm.allpage = res.totalpage>1 ? res.totalpage : 1;
+                    if (res.totalpage == 0){
+                        vm.showItem = 1;
+                    }else if (res.totalpage <= 5){
+                        vm.showItem = res.totalpage;
+                    }else {
+                        vm.showItem = 5;
+                    }
                     vm.postlist = res.postlist;
                 }
                 else

@@ -34,32 +34,32 @@
 <!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
 
 <script>
-    var marked = require('marked');
-    import 'highlight.js/styles/default.css';
-    import hljs from 'highlight.js'
+    // var marked = require('marked');
+    // import 'highlight.js/styles/default.css';
+    // import hljs from 'highlight.js'
     import { mavonEditor } from 'mavon-editor'
     // import tag from './TagInput'
     import 'mavon-editor/dist/css/index.css'
     import axios from 'axios'
 
 
-    marked.setOptions({
-        renderer: new marked.Renderer(),
-        gfm: true,
-        tables: true,
-        breaks: false,
-        pedantic: false,
-        sanitize: false,
-        smartLists: true,
-        smartypants: false,
-        highlight: function (code, lang) {
-            if (lang && hljs.getLanguage(lang)) {
-                return hljs.highlight(lang, code, true).value;
-            } else {
-                return hljs.highlightAuto(code).value;
-            }
-        }
-    });
+    // marked.setOptions({
+    //     renderer: new marked.Renderer(),
+    //     gfm: true,
+    //     tables: true,
+    //     breaks: false,
+    //     pedantic: false,
+    //     sanitize: false,
+    //     smartLists: true,
+    //     smartypants: false,
+    //     highlight: function (code, lang) {
+    //         if (lang && hljs.getLanguage(lang)) {
+    //             return hljs.highlight(lang, code, true).value;
+    //         } else {
+    //             return hljs.highlightAuto(code).value;
+    //         }
+    //     }
+    // });
 
     export default {
         name: 'Article',
@@ -115,7 +115,12 @@
                 else
                     alert(result.data.message);
             }).catch((error) => {
-                alert(error);
+                if (error.response.status == 404){
+
+                    vm.source.title = "找不到这篇文章！";
+                    vm.$refs.md.d_value = error.response.data.res;
+                    
+                }
             })
         },
         methods: {

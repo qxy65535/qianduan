@@ -33,12 +33,16 @@
 
 <script>
     import '../assets/style/js/particles.min.js'
+    import Header from '../components/Header'
     export default {
         name: 'Home',
         data() {
             return {
                 msg: 'Hello :)'
             }
+        },
+        components: {
+            'blog-header': Header
         },
         created: function () {
             $(function particlesanimate() {
