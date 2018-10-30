@@ -8,26 +8,7 @@ import Router from 'vue-router'
 // import { resolve } from 'url';
 
 Vue.use(Router)
-const Home = resolve => {
-  require.ensure(['@/views/Home'], () => {
-      resolve(require('@/views/Home'))
-  })
-}
-const Posts = resolve => {
-  require.ensure(['@/views/Posts'], () => {
-      resolve(require('@/views/Posts'))
-  })
-}
-const Editor = resolve => {
-  require.ensure(['@/components/MdEditor'], () => {
-      resolve(require('@/components/MdEditor'))
-  })
-}
-const Detail = resolve => {
-  require.ensure(['@/views/Detail'], () => {
-      resolve(require('@/views/Detail'))
-  })
-}
+
 export default new Router({
   // mode: 'history',
   routes: [
@@ -50,6 +31,11 @@ export default new Router({
       path: '/article/detail',
       name: 'Detail',
       component: resolve => require(['@/views/Detail'], resolve)
+    },
+    {
+      path: '/handwtreco',
+      name: 'HandwtReco',
+      component: resolve => require(['@/views/HandwtReco'], resolve)
     },
     { 
       path: '*', 

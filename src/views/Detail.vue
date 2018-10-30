@@ -4,7 +4,7 @@
             <blog-header></blog-header>
         </transition>
         <transition name="article-fade" appear>
-            <article-detail :source="id"></article-detail>
+            <article-detail></article-detail>
         </transition>
         <transition name="header-footer-fade" appear>
             <blog-footer></blog-footer>
@@ -24,7 +24,6 @@
         name: 'Detail',
         data() {
             return {
-                id:"1"
             }
         },
         components: {

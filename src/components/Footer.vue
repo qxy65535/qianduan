@@ -1,6 +1,8 @@
 <template>
     <footer class="foot">
-        <div class="foot-copy">&copy; 2018-2019 qxy</div>
+        <div class="foot-copy">&copy; 2018-2019 saltyfish 
+            <a href="http://www.miit.gov.cn/" target="view_window" style="color:#fff"> (浙ICP备18012827号)</a>
+        </div>
     </footer>
 </template>
 

@@ -9,7 +9,7 @@
                         <!-- <div class="markdown" v-html="compiledMarkdown"></div> -->
 
                     </header>
-                    <mavon-editor style="height: 100%" ref=md :toolbarsFlag="toolbarsFlag" 
+                    <mavon-editor style="height: 100%;" ref=md :toolbarsFlag="toolbarsFlag" 
                     :subfield="subfield" :defaultOpen="defaultOpen">
                     </mavon-editor>
                     <footer class="post__foot u-cf">
@@ -65,7 +65,6 @@
         name: 'Article',
         props: {
 
-            // id:"1"
         },
         components: {
             mavonEditor,
@@ -140,12 +139,12 @@
         margin: 30px 20px;
     }
     .post__title {
-        font-size: 250%;
+        font-size: 200%;
         margin: 0 10px;
     }
     .post__time {
         font-size: 100%;
-        margin: 0 20px;
+        margin: 0 15px;
     }
     .post__head {
         margin: 17px;

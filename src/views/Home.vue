@@ -5,7 +5,7 @@
             <div class="index-wrapper">
                 <header class="head index hide">
                     <h1 class="head-title u-fl">
-                        <a href="/">qxy</a>
+                        <a href="/">saltyfish</a>
                     </h1>
                     <nav class="head-nav u-fr">
                         <ul class="head-nav__list">

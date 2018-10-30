@@ -1,7 +1,7 @@
 <template>
     <header class="head">
         <h1 class="head-title u-fl">
-            <a href="/">qxy</a>
+            <a href="/">saltyfish</a>
         </h1>
         <nav class="head-nav u-fr">
             <ul class="head-nav__list">
