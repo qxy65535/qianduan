@@ -18,6 +18,16 @@ export default new Router({
       component: resolve => require(['@/views/Home'], resolve)
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: resolve => require(['@/views/Login'], resolve)
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: resolve => require(['@/views/Logout'], resolve)
+    },
+    {
       path: '/posts',
       name: 'Posts',
       component: resolve => require(['@/views/Posts'], resolve)
@@ -31,6 +41,11 @@ export default new Router({
       path: '/article/detail',
       name: 'Detail',
       component: resolve => require(['@/views/Detail'], resolve)
+    },
+    {
+      path: '/aboutme',
+      name: 'AboutMe',
+      component: resolve => require(['@/views/AboutMe'], resolve)
     },
     {
       path: '/handwtreco',

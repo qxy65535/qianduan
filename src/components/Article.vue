@@ -40,7 +40,7 @@
     import { mavonEditor } from 'mavon-editor'
     // import tag from './TagInput'
     import 'mavon-editor/dist/css/index.css'
-    import axios from 'axios'
+    // import axios from 'axios'
 
 
     // marked.setOptions({
@@ -94,7 +94,7 @@
             vm.id = vm.$route.query.id.toString();
             // var formdata = new FormData();
             // formdata.append("id", vm.id);
-            axios({
+            this.axios({
                 url: '/article/detail',
                 method: 'post',
                 data: {
@@ -102,6 +102,11 @@
                 },
                 contentType : "application/json" ,
             }).then((result) => {
+                if (result.response && result.response.status == 404) {
+                    vm.source.title = "找不到这篇文章！";
+                    vm.$refs.md.d_value = result.response.data.res;
+                    return;
+                }
                 if (result.data.success) {
                     // alert(pos)
                     var res = result.data.res;
@@ -114,19 +119,20 @@
                 else
                     alert(result.data.message);
             }).catch((error) => {
-                if (error.response.status == 404){
+                // console.log(error)
+                // if (error.response.status == 404){
 
-                    vm.source.title = "找不到这篇文章！";
-                    vm.$refs.md.d_value = error.response.data.res;
+                //     vm.source.title = "找不到这篇文章！";
+                //     vm.$refs.md.d_value = error.response.data.res;
                     
-                }
+                // }
             })
         },
         methods: {
             reward: function(){
-    var $reward = $('.reward-wrapper');
-		$reward.slideToggle();
-}
+                var $reward = $('.reward-wrapper');
+                    $reward.slideToggle();
+            }
         }
 
     }

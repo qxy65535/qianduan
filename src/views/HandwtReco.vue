@@ -32,7 +32,7 @@
 
 
 <script>
-    import axios from "axios"
+    // import axios from "axios"
     import Predict from "../components/Predict"
 
     export default {
@@ -129,7 +129,7 @@
                 var type = 'png';
                 var imageData = canvas[0].toDataURL(type).replace(this.fixType(type), 'image/octet-stream');
                 var vm = this;
-                axios({
+                this.axios({
                     url: '/recognition',
                     method: 'post',
                     data: {
@@ -143,7 +143,10 @@
                 }).then((result) => {
                     // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
                     // $vm.$img2Url 详情见本页末尾
-
+                    if (result.response) {
+                        alert(result);
+                        return;
+                    }
                     if (result.data.success) {
                         // alert(pos)
                         vm.recoResult = result.data.res.result;

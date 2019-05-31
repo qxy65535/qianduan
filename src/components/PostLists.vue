@@ -47,7 +47,7 @@
 <!--[if lt IE 9]><script>(function(a,b){a="abbr article aside audio bdi canvas data datalist details dialog figcaption figure footer header hgroup main mark meter nav output progress section summary template time video".split(" ");for(b=a.length-1;b>=0;b--)document.createElement(a[b])})()</script><![endif]-->
 
 <script>
-    import axios from 'axios'
+    // import axios from 'axios'
 
     export default {
         name: 'PostLists',
@@ -83,7 +83,7 @@
         },
         mounted() {
             var vm = this;
-            axios({
+            this.axios({
                 url: '/postlist',
                 method: 'post',
                 data: {
@@ -91,6 +91,10 @@
                 },
                 contentType: "application/json",
             }).then((result) => {
+                if (result.response) {
+                    alert(result);
+                    return;
+                }
                 if (result.data.success) {
                     // alert(pos)
                     var res = result.data.res;
@@ -116,7 +120,7 @@
                 this.current = index;
                 //这里可以发送ajax请求
                 var vm = this;
-                axios({
+                this.axios({
                     url: '/postlist',
                     method: 'post',
                     data: {
@@ -124,6 +128,10 @@
                     },
                     contentType: "application/json",
                 }).then((result) => {
+                    if (result.response) {
+                        alert(result);
+                        return;
+                    }
                     if (result.data.success) {
                         // alert(pos)
                         var res = result.data.res;

@@ -31,7 +31,7 @@
     import { mavonEditor } from 'mavon-editor'
     import tag from './TagInput'
     import 'mavon-editor/dist/css/index.css'
-    import axios from 'axios'
+    // import axios from 'axios'
     
 
 
@@ -61,12 +61,16 @@
                 var formdata = new FormData();
                 formdata.append('image', $file);
                 var vm = this.$refs.md;
-                axios({
+                this.axios({
                     url: '/imgAdd',
                     method: 'post',
                     data: formdata,
                     headers: { 'Content-Type': 'multipart/form-data' },
                 }).then((result) => {
+                    if (result.response) {
+                        alert(result);
+                        return;
+                    }
                     // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
                     // $vm.$img2Url 详情见本页末尾
 
@@ -103,7 +107,7 @@
                     alert("写点内容吧 :)");
                     return;
                 }
-                axios({
+                this.axios({
                     url: '/publish',
                     method: 'post',
                     data: {
