@@ -1,6 +1,6 @@
 # blog
 
-> A Vue.js project
+> blog.qsaltedfish.cn 的前端
 
 ## Build Setup
 
